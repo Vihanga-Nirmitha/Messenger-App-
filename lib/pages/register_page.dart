@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat/auth/auth_sarvice.dart';
 import 'package:wechat/component/my_button.dart';
 import 'package:wechat/component/my_textfield.dart';
 
@@ -6,9 +7,36 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confpassController = TextEditingController();
-  void register() {
+
+  void register(BuildContext context) {
     //login action here
+    final _auth = AuthSarvice();
+
+    //create user
+    if (_passwordController.text == _confpassController.text) {
+      try {
+        _auth.signUpWithEmailPassword(
+            _emailController.text, _passwordController.text);
+      } catch (e) {
+        showDialog(
+            // ignore: use_build_context_synchronously
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(e.toString()),
+                ));
+      }
+    }
+    // unmatch pass word
+    else {
+      showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => const AlertDialog(
+                title: Text("Password don't match"),
+              ));
+    }
   }
+
   final void Function()? onTap;
   RegisterPage({super.key, this.onTap});
 
@@ -61,7 +89,7 @@ class RegisterPage extends StatelessWidget {
             //register now
             MyButton(
               text: "Register",
-              onTap: register,
+              onTap: () => register(context),
             ),
             const SizedBox(height: 25),
             Row(
