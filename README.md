@@ -15,8 +15,8 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 ![](screenshots/1.jpeg)
-![](screenshots/2.jpeg)
 ![](screenshots/3.jpeg)
-![](screenshots/4.jpeg)
+![](screenshots/7.jpeg)
+![](screenshots/8.jpeg)
 ![](screenshots/5.jpeg)
 ![](screenshots/6.jpeg)
