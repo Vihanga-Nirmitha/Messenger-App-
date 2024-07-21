@@ -50,6 +50,7 @@ class RegisterPage extends StatelessWidget {
               obscured: true,
               controller: _passwordController,
             ),
+            const SizedBox(height: 15),
             MyTextFiled(
               hintText: "Confirm Password",
               obscured: true,
