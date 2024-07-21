@@ -9,7 +9,8 @@ class RegisterPage extends StatelessWidget {
   void register() {
     //login action here
   }
-  RegisterPage({super.key});
+  final void Function()? onTap;
+  RegisterPage({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +70,14 @@ class RegisterPage extends StatelessWidget {
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     )),
-                Text(
-                  "Login now ",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    "Login now ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],

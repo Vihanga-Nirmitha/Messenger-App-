@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat/auth/login_or_register.dart';
 import 'package:wechat/pages/login_page.dart';
 import 'package:wechat/pages/register_page.dart';
 import 'package:wechat/themes/light_mode.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+      home: const LoginOrRegister(),
       theme: lightMode,
     );
   }
