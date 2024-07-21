@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wechat/auth/auth_sarvice.dart';
+import 'package:wechat/services/auth/auth_service.dart';
 import 'package:wechat/component/my_button.dart';
 import 'package:wechat/component/my_textfield.dart';
 
@@ -10,12 +10,12 @@ class RegisterPage extends StatelessWidget {
 
   void register(BuildContext context) {
     //login action here
-    final _auth = AuthSarvice();
+    final auth = AuthService();
 
     //create user
     if (_passwordController.text == _confpassController.text) {
       try {
-        _auth.signUpWithEmailPassword(
+        auth.signUpWithEmailPassword(
             _emailController.text, _passwordController.text);
       } catch (e) {
         showDialog(

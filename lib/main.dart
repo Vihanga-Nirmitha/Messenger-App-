@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:wechat/auth/auth_gate.dart';
+import 'package:wechat/services/auth/auth_gate.dart';
 import 'package:wechat/firebase_options.dart';
 
 import 'package:wechat/themes/light_mode.dart';

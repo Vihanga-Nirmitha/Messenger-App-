@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wechat/auth/auth_sarvice.dart';
+import 'package:wechat/services/auth/auth_service.dart';
 import 'package:wechat/pages/settting_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
   void logout() {
-    final auth = AuthSarvice();
+    final auth = AuthService();
     auth.signOut();
   }
 
