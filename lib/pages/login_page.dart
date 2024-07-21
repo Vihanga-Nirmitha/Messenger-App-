@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:wechat/auth/auth_sarvice.dart';
 import 'package:wechat/component/my_button.dart';
 import 'package:wechat/component/my_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  void login() {
+  void login(BuildContext context) async {
+    final authService = AuthSarvice();
     //login action here
+    try {
+      await authService.signInWithEmailPassword(
+          _emailController.text, _passwordController.text);
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(e.toString()),
+              ));
+    }
   }
+
   final void Function()? onTap;
 
   LoginPage({super.key, this.onTap});
@@ -55,7 +70,7 @@ class LoginPage extends StatelessWidget {
             //register now
             MyButton(
               text: "Login",
-              onTap: login,
+              onTap: () => login(context),
             ),
             const SizedBox(height: 25),
             Row(
