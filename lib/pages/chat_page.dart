@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:wechat/component/chat_bubble.dart';
 import 'package:wechat/component/my_textfield.dart';
 import 'package:wechat/services/auth/auth_service.dart';
 import 'package:wechat/services/chat/chat_service.dart';
@@ -26,6 +27,9 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(receiverEmail),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -59,21 +63,40 @@ class ChatPage extends StatelessWidget {
 
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return Text(data["message"]);
+
+    //is current user
+    bool isCurrentUser = data['senderId'] == _authService.getCurrentUser()!.uid;
+    var alignment =
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+    return Container(
+        alignment: alignment,
+        child: ChatBubble(
+          message: data["message"],
+          isCurrentUser: isCurrentUser,
+        ));
   }
 
   Widget _buildUserInput() {
-    return Row(
-      children: [
-        Expanded(
-          child: MyTextFiled(
-            controller: _messageController,
-            hintText: "Type a message",
-            obscured: false,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50),
+      child: Row(
+        children: [
+          Expanded(
+            child: MyTextFiled(
+              controller: _messageController,
+              hintText: "Type a message",
+              obscured: false,
+            ),
           ),
-        ),
-        IconButton(onPressed: sentMessage, icon: const Icon(Icons.arrow_upward))
-      ],
+          Container(
+            decoration:
+                const BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+            margin: const EdgeInsets.only(right: 25),
+            child: IconButton(
+                onPressed: sentMessage, icon: const Icon(Icons.arrow_upward)),
+          )
+        ],
+      ),
     );
   }
 }
